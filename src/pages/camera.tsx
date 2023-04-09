@@ -79,7 +79,7 @@ export const Camera = ({ onStream, onError }: CameraProps) => {
   return (
     <div className='flex flex-col gap-4 p-4 justify-start'>
       <div className='z-0'>
-        <video ref={videoRef} autoPlay className='bg-gray-400 h-96 my-5' />
+        <video ref={videoRef} autoPlay className='bg-gray-400 w-full h-96 my-5 ' />
       </div>
       <div className='z-50'>
         <div className='flex flex-col justify-center items-center w-full gap-3 my-8'>
