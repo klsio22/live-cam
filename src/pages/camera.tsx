@@ -40,6 +40,7 @@ export const Camera = ({ onStream, onError }: CameraProps) => {
       const mediaStream = await navigator.mediaDevices.getUserMedia({
         video: {
           width: { min: 1024, ideal: 1280, max: 1920 },
+          height: { min: 576, ideal: 600, max: 1080 },
         },
         audio: true,
       });
