@@ -78,41 +78,43 @@ export const Camera = ({ onStream, onError }: CameraProps) => {
 
   return (
     <div className='flex flex-col gap-4 p-4 justify-start'>
-      <div className='bg-gray-400 h-96 my-5'>
-        <video ref={videoRef} autoPlay className='my-2'/>
+      <div className='bg-gray-400 h-96 my-5 z-0'>
+        <video ref={videoRef} autoPlay className='my-2 z-0' />
       </div>
-      <div className='flex flex-col justify-center items-center w-full gap-3 my-4'>
-        <button
-          onClick={switchCamera}
-          className='bg-green-400 w-1/2 p-2 rounded'
-        >
-          Switch Camera
-        </button>
-        <select
-          className='w-full'
-          value={selectedDevice || ''}
-          onChange={handleDeviceChange}
-        >
-          {devices.map((device) => (
-            <option key={device.deviceId} value={device.deviceId}>
-              {device.label}
-            </option>
-          ))}
-        </select>
-      </div>
-      <div className='flex gap-4 justify-between text-white'>
-        <button
-          onClick={handleStartClick}
-          className='bg-sky-700 w-1/2 p-2 rounded'
-        >
-          Start Camera
-        </button>
-        <button
-          onClick={handleStopClick}
-          className='bg-red-700 w-1/2 p-2 rounded'
-        >
-          Stop Camera
-        </button>
+      <div className='z-50'>
+        <div className='flex flex-col justify-center items-center w-full gap-3 my-4'>
+          <button
+            onClick={switchCamera}
+            className='bg-green-400 w-1/2 p-2 rounded'
+          >
+            Switch Camera
+          </button>
+          <select
+            className='w-full'
+            value={selectedDevice || ''}
+            onChange={handleDeviceChange}
+          >
+            {devices.map((device) => (
+              <option key={device.deviceId} value={device.deviceId}>
+                {device.label}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className='flex gap-4 justify-between text-white'>
+          <button
+            onClick={handleStartClick}
+            className='bg-sky-700 w-1/2 p-2 rounded'
+          >
+            Start Camera
+          </button>
+          <button
+            onClick={handleStopClick}
+            className='bg-red-700 w-1/2 p-2 rounded'
+          >
+            Stop Camera
+          </button>
+        </div>
       </div>
     </div>
   );
