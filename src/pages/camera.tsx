@@ -40,7 +40,6 @@ export const Camera = ({ onStream, onError }: CameraProps) => {
       const mediaStream = await navigator.mediaDevices.getUserMedia({
         video: {
           width: { min: 1024, ideal: 1280, max: 1920 },
-          height: { min: 576, ideal: 720, max: 1080 },
         },
         audio: true,
       });
@@ -78,11 +77,11 @@ export const Camera = ({ onStream, onError }: CameraProps) => {
 
   return (
     <div className='flex flex-col gap-4 p-4 justify-start'>
-      <div className='bg-gray-400 h-96 my-5 z-0'>
-        <video ref={videoRef} autoPlay className='my-2 z-0' />
+      <div className='z-0'>
+        <video ref={videoRef} autoPlay className='bg-gray-400 h-96 my-5' />
       </div>
       <div className='z-50'>
-        <div className='flex flex-col justify-center items-center w-full gap-3 my-4'>
+        <div className='flex flex-col justify-center items-center w-full gap-3 my-8'>
           <button
             onClick={switchCamera}
             className='bg-green-400 w-1/2 p-2 rounded'
