@@ -38,7 +38,10 @@ export const Camera = ({ onStream, onError }: CameraProps) => {
   const handleStartClick = async () => {
     try {
       const mediaStream = await navigator.mediaDevices.getUserMedia({
-        video: true,
+        video: {
+          width: { min: 1024, ideal: 1280, max: 1920 },
+          height: { min: 576, ideal: 720, max: 1080 },
+        },
         audio: true,
       });
       setStream(mediaStream);
@@ -76,7 +79,7 @@ export const Camera = ({ onStream, onError }: CameraProps) => {
   return (
     <div className='flex flex-col gap-4 p-4 justify-start'>
       <div className='bg-gray-400 h-96 my-5'>
-        <video ref={videoRef} autoPlay />
+        <video ref={videoRef} autoPlay className='my-2'/>
       </div>
       <div className='flex flex-col justify-center items-center w-full gap-3 my-4'>
         <button
@@ -85,7 +88,11 @@ export const Camera = ({ onStream, onError }: CameraProps) => {
         >
           Switch Camera
         </button>
-        <select className='w-full' value={selectedDevice || ''} onChange={handleDeviceChange}>
+        <select
+          className='w-full'
+          value={selectedDevice || ''}
+          onChange={handleDeviceChange}
+        >
           {devices.map((device) => (
             <option key={device.deviceId} value={device.deviceId}>
               {device.label}
