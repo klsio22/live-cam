@@ -1,55 +1,11 @@
-import { useRef, useState } from 'react';
+import { Camera } from './pages/camera';
 
-type CameraProps = {
-  onStream: (stream: MediaStream) => void;
-  onError: (error: Error) => void;
-};
-
-function App({ onStream, onError }: CameraProps) {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [stream, setStream] = useState<MediaStream | null>(null);
-
-  const handleStartClick = async () => {
-    try {
-      const mediaStream = await navigator.mediaDevices.getUserMedia({
-        video: true,
-        audio: true,
-      });
-      setStream(mediaStream);
-      onStream(mediaStream);
-
-      if (videoRef.current) {
-        videoRef.current.srcObject = mediaStream;
-      }
-    } catch (error) {
-      alert(error);
-    }
-  };
-
-  const handleStopClick = () => {
-    if (stream) {
-      stream.getTracks().forEach((track) => {
-        track.stop();
-      });
-      setStream(null);
-    }
-  };
-
+function App() {
   return (
-    <div className='flex flex-col gap-4 p-4'>
-      <div className='bg-gray-400'>
-        <video ref={videoRef} autoPlay />
-      </div>
-
-      <div className='flex gap-4 justify-between text-white'>
-        <button onClick={handleStartClick} className='bg-sky-700 w-1/2 p-2 rounded'>
-          Start Camera
-        </button>
-        <button onClick={handleStopClick} className='bg-red-700 w-1/2 p-2 rounded'>
-          Stop Camera
-        </button>
-      </div>
-    </div>
+    <Camera
+      onStream={(stream) => console.log(stream)}
+      onError={(error) => console.error(error)}
+    />
   );
 }
 
